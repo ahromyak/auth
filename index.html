@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="index.css" rel="stylesheet" media="all">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<script>
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            console.log(statusChangeCallback);
+            statusChangeCallback(response);
+        });
+    }
+    window.fbAsyncInit = function() {
+
+
+        FB.init({
+            appId      : '390529531324847',
+            xfbml      : true,
+            version    : 'v2.8'
+        });
+
+        FB.AppEvents.logPageView();
+
+        FB.getLoginStatus(function(response) {
+            console.log(response);
+            if (response.status === 'connected') {
+                console.log(response.authResponse.accessToken);
+            }
+
+//            statusChangeCallback(response);
+        });
+
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+
+</script>
+
+
+<h1>FAcebook Auth</h1>
+
+<div>
+    <fb:login-button
+            scope="public_profile,email"
+            onlogin="checkLoginState();">
+    </fb:login-button>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
